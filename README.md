@@ -4,7 +4,7 @@ This is the good old game 2048 with replays, undo, nicer colours (and a colour p
 
 While playing, hit 'z' to undo the most recent move. The undo history goes all the way back to the beginning.
 
-As you play, the replay textarea fills up with a code you can share with other players. To replay someone else's code, just paste it into the textarea and click the play button. There are some pre-made replays in the [`replay/`](tree/master/replays) directory.
+As you play, the replay textarea fills up with a code you can share with other players. To replay someone else's code, just paste it into the textarea and click the play button. There are some pre-made replays in the [`replays/`](replays) directory if you want to check them out.
 
 You can adjust delay between each replay move using the up and down arrow buttons. If the speed is set to 0, the replayer will try and make a thousand moves at a time to speed things up. Even so, very long replays can still take several minutes to run.
 
