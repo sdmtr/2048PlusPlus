@@ -1,14 +1,15 @@
-# 2048
-A small clone of [1024](https://play.google.com/store/apps/details?id=com.veewo.a1024), based on [Saming's 2048](http://saming.fr/p/2048/) (also a clone).
+# 2048PlusPlus
 
-Made just for fun. [Play it here!](http://sdmtr.github.io/2048/)
+This is the good old game 2048 with replays, undo, nicer colours (and a colour picker if you're so inclined), and milestones. It doesn't stop at 2048, nor does it stop when you have no more moves left.
 
-Find out more at the [original 2048 repository](https://github.com/gabrielecirulli/2048).
+While playing, hit 'z' to undo the most recent move. The undo history goes all the way back to the beginning.
 
-### Replays
+As you play, the replay textarea fills up with a code you can share with other players. To replay someone else's code, just paste it into the textarea and click the play button. There are some pre-made replays in the [`replay/`](tree/master/replays) directory.
 
-As you play, the replay textarea fills up with a code you can share with other players. To replay someone else's code, just paste it into the textarea and click the play button.
+You can adjust delay between each replay move using the up and down arrow buttons. If the speed is set to 0, the replayer will try and make a thousand moves at a time to speed things up. Even so, very long replays can still take several minutes to run.
 
-You can pause replay at any point. If you click the stop button while a replay is running or paused, the current replay is truncated and you can continue playing from that point.
+You can pause the replay at any point. If you click the stop button while a replay is running or paused, the current replay is truncated and you can continue playing from that point.
 
-This doesn't work on mobile because I don't know how to debug javascript on mobile Safari :)
+None of this works on mobile because I don't know how to debug javascript on mobile Safari and also I'm very lazy.
+
+Based on the [original 2048](https://github.com/gabrielecirulli/2048) by Gabriele Cirulli.
