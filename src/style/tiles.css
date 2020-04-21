@@ -1,0 +1,59 @@
+.tile-2-color { background: #2D3245; color: #2D3245; }
+.tile-4-color { background: #2C4A6F; color: #2C4A6F; }
+.tile-8-color { background: #3272A8; color: #3272A8; }
+.tile-16-color { background: #596AA0; color: #596AA0; }
+.tile-32-color { background: #806298; color: #806298; }
+.tile-64-color { background: #CE5188; color: #CE5188; }
+.tile-128-color { background: #F5487F; color: #F5487F; }
+.tile-256-color { background: #F76373; color: #F76373; }
+.tile-512-color { background: #F98066; color: #F98066; }
+.tile-1024-color { background: #FA9F58; color: #FA9F58; }
+.tile-2048-color { background: #FCBC4B; color: #FCBC4B; }
+.tile-4096-color { background: #FDDB3E; color: #FDDB3E; }
+.tile-8192-color { background: #FFA22F; color: #FFA22F; }
+.tile-16384-color { background: #FF822F; color: #FF822F; }
+.tile-32768-color { background: #FF5B2F; color: #FF5B2F; }
+.tile-65536-color { background: #FF2F2F; color: #FF2F2F; }
+.tile-131072-color { background: #FFFFFF; color: #FFFFFF; }
+
+/* font sizes */
+
+.tile.tile-128 .tile-inner,
+.tile.tile-256 .tile-inner,
+.tile.tile-512 .tile-inner {
+  font-size: 45px;
+}
+
+.tile.tile-1024 .tile-inner,
+.tile.tile-2048 .tile-inner,
+.tile.tile-4096 .tile-inner,
+.tile.tile-8192 .tile-inner {
+  font-size: 35px;
+}
+
+.tile.tile-16384 .tile-inner, 
+.tile.tile-32768 .tile-inner, 
+.tile.tile-65536 .tile-inner {
+  font-size: 30px;
+} 
+
+.tile.tile-131072 .tile-inner {
+  font-size: 15px;
+}
+
+/* font sizes for smaller screens not that it matters */
+
+@media screen and (max-width: 480px) {
+  .tile.tile-128 .tile-inner,
+  .tile.tile-256 .tile-inner,
+  .tile.tile-512 .tile-inner {
+    font-size: 25px;
+  }
+
+  .tile.tile-1024 .tile-inner,
+  .tile.tile-2048 .tile-inner,
+  .tile.tile-4096 .tile-inner,
+  .tile.tile-8192 .tile-inner {
+    font-size: 15px;
+  }
+}

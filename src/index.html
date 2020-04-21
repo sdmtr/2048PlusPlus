@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>2048++</title>
+
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link href="style/tiles.css" rel="stylesheet" type="text/css">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+
+<style>
+  #tile-debug {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    display: none;
+  }
+
+  #tile-debug .debug-tile {
+    width: 50px;
+    height:50px;
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 1.4em;
+  }
+
+  #tile-debug .jscolor, #tile-debug input {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    letter-spacing: -1px;
+    line-height: 3.2em;
+    border: none;
+    outline: none;
+    text-align: center;
+  }
+
+  #tile-debug input {
+    display: inline-block;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    border-radius: 3px;
+  }
+
+  #tile-debug .tile-rgb {
+    font-weight: bold !important;
+    height: 20px;
+    font-size: 10px !important;
+    background-color: #212327;
+    color: #72777f;
+  }
+
+  #tile-debug button {
+    border-radius: 3px;
+    background-color: #72777f;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  #tile-debug button:active {
+    outline: none;
+    background-color: #555b63;
+  }
+
+  textarea.replay-code {
+    word-break: break-all;
+    font-family: monospace;
+  }
+</style>
+
+<div id="tile-debug">
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-2'}" type="text" value="2"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-2" type="text" value="f5b0cb"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-4'}" type="text" value="4"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-4" type="text" value="d597ce"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-8'}" type="text" value="8"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-8" type="text" value="745c97"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-16'}" type="text" value="16"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-16" type="text" value="39375b"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-32'}" type="text" value="32"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-32" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-64'}" type="text" value="64"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-64" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-128'}" type="text" value="128"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-128" type="text" value="553772"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-256'}" type="text" value="256"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-256" type="text" value="8F3B76"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-512'}" type="text" value="512"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-512" type="text" value="C7417B"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-1024'}" type="text" value="1024"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="xfalse" id="tile-rgb-1024" type="text" value="F5487F"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-2048'}" type="text" value="2048"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-2048" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-4096'}" type="text" value="4096"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-4096" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-8192'}" type="text" value="8192"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-8192" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-16384'}" type="text" value="16384"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-16384" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-32768'}" type="text" value="32768"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-32768" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-65536'}" type="text" value="65536"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-65536" type="text" value="aaaaaa"></div>
+  <div class="debug-tile"><input class="jscolor {valueElement:'tile-rgb-131072'}" type="text" value="131072"><input class="tile-rgb" onfocus="this.select();" onmouseup="return false;" spellcheck="false" id="tile-rgb-131072" type="text" value="aaaaaa"></div>
+  <br><br><button id="copy-button">copy</button>
+</div>
+
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">2048</h1>
+      <h2 class="subtitle">PlusPlus</h2>
+      <div class="scores-container">
+        <div class="score-container">0</div><div class="best-container">0</div>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+          <a class="retry-button">Try again</a>
+          <a class="replay-button">Replay</a>
+          <a class="continue-button">Continue</a>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div class="tile-container">
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="milestones">
+      <h3>Milestones</h3>
+      <div class="tables">
+        <table class="first">
+          <tr><td id="milestone-4-name">4 Eyes</td><td id="milestone-4-score">0</td></tr>
+          <tr><td id="milestone-8-name">8 Banger</td><td id="milestone-8-score">0</td></tr>
+          <tr><td id="milestone-16-name">16 Gauge</td><td id="milestone-16-score">0</td></tr>
+          <tr><td id="milestone-32-name">32 Bit</td><td id="milestone-32-score">0</td></tr>
+          <tr><td id="milestone-64-name">64 Banger</td><td id="milestone-64-score">0</td></tr>
+          <tr><td id="milestone-128-name">128 Banger</td><td id="milestone-128-score">0</td></tr>
+          <tr><td id="milestone-256-name">256 Banger</td><td id="milestone-256-score">0</td></tr>
+          <tr><td id="milestone-512-name">512 Banger</td><td id="milestone-512-score">0</td></tr>
+        </table>
+      </div>
+
+      <div class="tables">
+        <table class="second">
+          <tr><td id="milestone-1024-score">0</td><td id="milestone-1024-name">1024 Banger</td></tr>
+          <tr><td id="milestone-2048-score">0</td><td id="milestone-2048-name">2048 Banger</td></tr>
+          <tr><td id="milestone-4096-score">0</td><td id="milestone-4096-name">4096 Banger</td></tr>
+          <tr><td id="milestone-8192-score">0</td><td id="milestone-8192-name">8192 Banger</td></tr>
+          <tr><td id="milestone-16384-score">0</td><td id="milestone-16384-name">16384 Banger</td></tr>
+          <tr><td id="milestone-32768-score">0</td><td id="milestone-32768-name">32768 Banger</td></tr>
+          <tr><td id="milestone-65536-score">0</td><td id="milestone-65536-name">65536 Banger</td></tr>
+          <tr><td id="milestone-131072-score">0</td><td id="milestone-131072-name">131072 Granddaddy</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="replay">
+      <div class="controls untouchable clearfix">
+        <div class="button play"><div></div></div>
+        <div class="button pause"><div></div></div>
+        <div class="button stop"><div></div></div>
+        <div class="button faster"><div></div></div>
+        <div class="button slower"><div></div></div>
+        <div class="speed"><span>0</span>ms</div>
+        <div class="count">Move <span class="current">0</span> of <span class="total">0</span></div>
+      </div>
+      <textarea class="replay-code"></textarea>
+    </div>
+    <hr>
+    <p class="credits">
+      Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Replays added by <a href="http://sdmtr.com" target="_blank">Savvas Dimitriou</a>. Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a> Source available at <a href="https://github.com/sdmtr/2048PlusPlus">Github</a>.
+    </p>
+  </div>
+
+  <script src="js/animframe_polyfill.js"></script>
+  <script src="js/keyboard_input_manager.js"></script>
+  <script src="js/html_actuator.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/vgrid.js"></script>
+  <script src="js/tile.js"></script>
+  <script src="js/local_score_manager.js"></script>
+  <script src="js/replay_manager.js"></script>
+  <script src="js/ai_manager.js"></script>
+  <script src="js/game_manager.js"></script>
+  <script src="js/application.js"></script>
+  <script src="js/jscolor.js"></script>
+
+  <script>
+    function eid(id) { return document.getElementById(id) };
+
+    function fallbackCopyTextToClipboard(text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position="fixed";  //avoid scrolling to bottom
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+      } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+      }
+
+      document.body.removeChild(textArea);
+    }
+
+    function copyTextToClipboard(text) {
+      if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+      }
+      navigator.clipboard.writeText(text).then(function() {
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+    }
+
+    eid('copy-button').addEventListener('click', function(event) {    
+      var css = ".tile-2-color { background: #" + eid('tile-rgb-2').value + "; color: #" + eid('tile-rgb-2').value + "; }\n" +
+        ".tile-4-color { background: #" + eid('tile-rgb-4').value + "; color: #" + eid('tile-rgb-4').value + "; }\n" +
+        ".tile-8-color { background: #" + eid('tile-rgb-8').value + "; color: #" + eid('tile-rgb-8').value + "; }\n" +
+        ".tile-16-color { background: #" + eid('tile-rgb-16').value + "; color: #" + eid('tile-rgb-16').value + "; }\n" +
+        ".tile-32-color { background: #" + eid('tile-rgb-32').value + "; color: #" + eid('tile-rgb-32').value + "; }\n" +
+        ".tile-64-color { background: #" + eid('tile-rgb-64').value + "; color: #" + eid('tile-rgb-64').value + "; }\n" +
+        ".tile-128-color { background: #" + eid('tile-rgb-128').value + "; color: #" + eid('tile-rgb-128').value + "; }\n" +
+        ".tile-256-color { background: #" + eid('tile-rgb-256').value + "; color: #" + eid('tile-rgb-256').value + "; }\n" +
+        ".tile-512-color { background: #" + eid('tile-rgb-512').value + "; color: #" + eid('tile-rgb-512').value + "; }\n" +
+        ".tile-1024-color { background: #" + eid('tile-rgb-1024').value + "; color: #" + eid('tile-rgb-1024').value + "; }\n" +
+        ".tile-2048-color { background: #" + eid('tile-rgb-2048').value + "; color: #" + eid('tile-rgb-2048').value + "; }\n" +
+        ".tile-4096-color { background: #" + eid('tile-rgb-4096').value + "; color: #" + eid('tile-rgb-4096').value + "; }\n" +
+        ".tile-8192-color { background: #" + eid('tile-rgb-8192').value + "; color: #" + eid('tile-rgb-8192').value + "; }\n" +
+        ".tile-16384-color { background: #" + eid('tile-rgb-16384').value + "; color: #" + eid('tile-rgb-16384').value + "; }\n" +
+        ".tile-32768-color { background: #" + eid('tile-rgb-32768').value + "; color: #" + eid('tile-rgb-32768').value + "; }\n" +
+        ".tile-65536-color { background: #" + eid('tile-rgb-65536').value + "; color: #" + eid('tile-rgb-65536').value + "; }\n" +
+        ".tile-131072-color { background: #" + eid('tile-rgb-131072').value + "; color: #" + eid('tile-rgb-131072').value + "; }\n";
+      copyTextToClipboard(css);
+    });
+
+    function getTileColor(value) {
+      var checkTile = document.createElement("div");
+      checkTile.className = "tile-" + value + "-color";
+      checkTile.setAttribute("id", "check-tile");
+      document.body.appendChild(checkTile);
+
+      var color = window.getComputedStyle(eid('check-tile')).backgroundColor;
+
+      eid("check-tile").remove();
+
+      return color;
+    }
+
+    eid('tile-rgb-2').value = getTileColor(2);
+    eid('tile-rgb-4').value = getTileColor(4);
+    eid('tile-rgb-8').value = getTileColor(8);
+    eid('tile-rgb-16').value = getTileColor(16);
+    eid('tile-rgb-32').value = getTileColor(32);
+    eid('tile-rgb-64').value = getTileColor(64);
+    eid('tile-rgb-128').value = getTileColor(128);
+    eid('tile-rgb-256').value = getTileColor(256);
+    eid('tile-rgb-512').value = getTileColor(512);
+    eid('tile-rgb-1024').value = getTileColor(1024);
+    eid('tile-rgb-2048').value = getTileColor(2048);
+    eid('tile-rgb-4096').value = getTileColor(4096);
+    eid('tile-rgb-8192').value = getTileColor(8192);
+    eid('tile-rgb-16384').value = getTileColor(16384);
+    eid('tile-rgb-32768').value = getTileColor(32768);
+    eid('tile-rgb-65536').value = getTileColor(65536);
+    eid('tile-rgb-131072').value = getTileColor(131072);
+ 
+  </script>
+</body>
+</html>
